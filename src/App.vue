@@ -1,13 +1,14 @@
 <template>
-  <h1>{{ getTitle() }}</h1>
-  <input :type="getType()" />
+  <h1 @click="userClick">Hello World</h1>
+  <input @input="userInput($event, 'world')" type="text" />
 </template>
 <script setup lang="ts">
-function getTitle() {
-  return 'Un Titre!'
+function userClick(event: MouseEvent) {
+  console.log(event)
 }
-function getType() {
-  return 'number'
+
+function userInput(event: Event, str: string) {
+  console.log(str)
 }
 </script>
 <style></style>
