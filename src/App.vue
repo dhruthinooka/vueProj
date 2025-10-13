@@ -1,23 +1,21 @@
 <template>
-  <h1>Bonjour {{ user.name }}</h1>
-  <h2>count: {{ count }}</h2>
-  <button @click="incCount">Add</button>
+  <h1>Prix total HT: {{ totalPriceHT }}</h1>
+  <h2>Prix total TTC: {{ totalPriceTTC }}</h2>
 </template>
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { computed, reactive } from 'vue'
 
-const state = reactive( {
-  user: {
-    name: 'Tarun',
-    age: 32,
-  }
+const product = reactive({
+  name: 'books',
+  quantity: 3,
+  priceHT: 10
 })
 
-let { user } = state;
-let count = ref(0);
-function incCount() {
-  count.value++;
-  user.name = user.name === 'Tarun' ? 'Sita' : 'Tarun';
-}
+const totalPriceHT = computed(() => {
+  return product.priceHT * product.quantity
+})
+const totalPriceTTC = computed(() => {
+  return product.priceHT * product.quantity * 1.2
+})
 </script>
 <style></style>
