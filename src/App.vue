@@ -1,24 +1,23 @@
 <template>
-  <div @click="userClick('div')">
-    <h1 @click.stop.left="userClick('h1')">Hello World</h1>
-  </div>
-  <input @keyup.enter="mykeyup">
-  <form @submit.prevent="formSubmit">
-    <button>Submit</button>
-  </form>
-
+  <h1>Bonjour {{ user.name }}</h1>
+  <h2>count: {{ count }}</h2>
+  <button @click="incCount">Add</button>
 </template>
 <script setup lang="ts">
-function userClick(from: string) {
-  console.log('click from ', from);
-}
+import { ref, reactive } from 'vue'
 
-function formSubmit() {
-  console.log('form submitted');
-}
+const state = reactive( {
+  user: {
+    name: 'Tarun',
+    age: 32,
+  }
+})
 
-function mykeyup() {
-  console.log('mykeyup');
+let { user } = state;
+let count = ref(0);
+function incCount() {
+  count.value++;
+  user.name = user.name === 'Tarun' ? 'Sita' : 'Tarun';
 }
 </script>
 <style></style>
