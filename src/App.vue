@@ -7,15 +7,23 @@
   <h2>Prix total TTC: {{ totalPriceTTC }}</h2>
 </template>
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, reactive, ref, watch, watchEffect } from 'vue'
 
+interface Product {
+  name: string,
+  quantity: number,
+  priceHT: number,
+  nbrOfModification: number,
+  lastModification: number | null
+}
 const text = ref('')
 
-const product = reactive({
+const product = reactive<Product>({
   name: 'books',
   quantity: 1,
   priceHT: 10,
   nbrOfModification: 0,
+  lastModification:  null
 })
 
 const price = ref(0);
@@ -30,6 +38,13 @@ watch([() => product.quantity, price], (newValue, oldValue) => {
   product.nbrOfModification++;
   console.log(newValue);
   console.log(oldValue);
+})
+
+watchEffect(() => {
+  console.log('in watchEffect');
+  product.priceHT = price.value;
+  product.lastModification = Date.now()
+  console.log(product);
 })
 </script>
 <style></style>
