@@ -1,51 +1,46 @@
 <template>
-  <input
-    class="input"
-    :class="{
-      inputOngoing,
-      inputError,
-      inputValid
+  <h1
+    :style="{
+      'font-size': fontSize,
+      color: color,
     }"
-    @focus="
-      input.focus = true;
-      input.touched = true
-    "
-    @blur="input.focus = false"
-    type="text"
-    v-model="input.value"
-  />
+  >
+    Bonjour le monde !
+  </h1>
+  <h2
+    :style="h1style"
+  >
+    Bienvenue !
+  </h2>
+  <h3 :style="{
+      fontSize: btnFontSize + 'px'
+  }">
+    Boom
+  </h3>
+  <button @click="btnFontSize += 10">+</button>
+  <button @click="btnFontSize -= 10">-</button>
+  <h4 :style="[fontSizeStr, colorStr]">Hello</h4>
 </template>
+<!--un tableau de diff styles-->
 <script setup lang="ts">
-import { computed, reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
-const input = reactive({
-  value: '',
-  focus: false,
-  touched: false
+// to declare individual reactive props
+const fontSize = ref('5px')
+const color = ref('red')
+
+// to declare an obj with multiple props as reactive
+const h1style = reactive({
+  fontSize: '20px',
+  color: 'blue'
 })
-const inputOngoing = computed(() => input.focus
-  && input.value.length)
-const inputError = computed(() => !input.focus && input.touched
-  && input.value.length <= 5)
-const inputValid = computed(() => input.touched
-  && !input.focus && !inputError.value)
+
+const btnFontSize = ref(10)
+
+const fontSizeStr = ref('font-size:15px;')
+const colorStr = ref('color:green;')
+
 </script>
-<style scoped>
-.input {
-  outline: 0;
-  border: 2px solid black;
-  border-radius: 4px;
-}
-
-.inputOngoing {
-  border-color: cadetblue;
-}
-
-.inputError {
-  border-color: red;
-}
-
-.inputValid {
-  border-color: green;
-}
-</style>
+<style scoped></style>
+<script setup lang="ts">
+</script>
