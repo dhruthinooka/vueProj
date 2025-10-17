@@ -1,33 +1,29 @@
 <template>
-  <h3>{{ title }} : {{ quantity }}</h3>
+  <h3>{{ title }}</h3>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue'
+import type { ProductInterface } from './interfaces/product.interface.ts';
+
+const props = defineProps<{
+  product: ProductInterface
+}>()
+
+console.log(props.product.available)
+const title = computed(() => props.product.nameProduct.toUpperCase())
 
 // Fetch the properties without typing
 // const props = defineProps(['nameProduct', 'quantity', 'price'])
 
-const props = defineProps({
-  nameProduct: {
-    type: String,
-    default: 'Apple',
-    validator(value: string): boolean {
-      return value.length > 10 ? false : true;
-    }
-  },
-  quantity: Number,
-  price: {
-    type: Number,
-    required: true
-  },
-  available: Boolean
-})
-
-console.log(props.available)
-
-const title = computed(() => props.nameProduct.toUpperCase())
-console.log(props.price)
+// Fetch the properties by generic
+// const props = defineProps<{
+//   // mandatory
+//   price: number,
+//   nameProduct: string,
+//   // optional
+//   available?: boolean
+// }>()
 </script>
 
 <style lang="scss" scoped></style>
