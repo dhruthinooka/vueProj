@@ -1,31 +1,25 @@
 <template>
-  <button @click="$emit('bigger', props.fontSize, 5, 'hello')">+</button>
-  <button @click="$emit('smaller')">-</button>
-  <p :style="{ fontSize: props.fontSize + 'px' }">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-    Accusamus architecto assumenda corporis eligendi hic nihil,
-    qui soluta! Atque inventore minus modi, nobis perspiciatis tenetur.
-    Aspernatur nobis provident quaerat quidem unde.</p>
+  <h2>Blog</h2>
 </template>
 
 <script lang="ts" setup>
-const props = defineProps<{
-  fontSize: number
-}>()
+import { reactive, ref, type Ref } from 'vue'
 
-const emit = defineEmits<{
-  (e: 'bigger', fontSize: number, inc: number, str: string): void
-  (e: 'smaller'): void
+const count = ref(15)
+const arrTest = reactive([1, 2, 3, 4, 5]);
+
+function display() {
+  console.log('Display');
 }
->()
-
-// const emit = defineEmits({
-//   bigger: (fontSize: number, inc: number, str: string) => {
-//     return fontSize > 30 ? false : true
-//   },
-//   smaller: null
-// })
-
-// emit('bigger', props.fontSize, 10, 'Hi');
+defineExpose<{
+  count: Ref<number>,
+  arrTest: number[],
+  display: () => void
+}>({
+  count,
+  arrTest,
+  display
+})
 </script>
 
 <style lang="scss" scoped></style>
