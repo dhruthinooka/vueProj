@@ -8,5 +8,5 @@ createApp(App).mount('#app');
 // const app = createApp(App)
 // Global component without importing in App component
 // rather have to import in this file
-// app.component('Product', Product)
+// app.component('Blog', Blog)
 // app.mount('#app');
