@@ -1,5 +1,7 @@
 <template>
-  <Product :name-product="product" :quantity="quantity" :price="1500"/>
+  <Product available :name-product="product"
+           :quantity="quantity" :price="1500"/>
+  <button disabled>Disabled</button>
 </template>
 <script setup lang="ts">
 // Local component by importing as below

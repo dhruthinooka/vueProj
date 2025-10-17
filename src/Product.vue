@@ -11,12 +11,20 @@ import { computed } from 'vue'
 const props = defineProps({
   nameProduct: {
     type: String,
-    required: true,
-    // default: 'Apple'
+    default: 'Apple',
+    validator(value: string): boolean {
+      return value.length > 10 ? false : true;
+    }
   },
   quantity: Number,
-  price: Number,
+  price: {
+    type: Number,
+    required: true
+  },
+  available: Boolean
 })
+
+console.log(props.available)
 
 const title = computed(() => props.nameProduct.toUpperCase())
 console.log(props.price)
