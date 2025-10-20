@@ -1,25 +1,14 @@
 <template>
-  <h2>Blog</h2>
+  <h1>{{ title }}</h1>
+  <p :class="$attrs.class">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dolor iste minus molestias nulla
+    pariatur quaerat quia ratione reiciendis vel! Ad amet at cupiditate eius excepturi odit quis sed
+    tempora!
+  </p>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, type Ref } from 'vue'
-
-const count = ref(15)
-const arrTest = reactive([1, 2, 3, 4, 5]);
-
-function display() {
-  console.log('Display');
-}
-defineExpose<{
-  count: Ref<number>,
-  arrTest: number[],
-  display: () => void
-}>({
-  count,
-  arrTest,
-  display
-})
+defineProps<{ title: string }>()
 </script>
 
 <style lang="scss" scoped></style>
